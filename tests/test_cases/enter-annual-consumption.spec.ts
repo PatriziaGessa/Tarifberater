@@ -29,7 +29,6 @@ test.afterEach(async ({ page }) => {
 test.describe('User Story 2: Enter Annual Consumption', () => {
 
     test('Verify Visibility & Initial Input Value "Jahresverbrauch" field', async ({ page }) => {
-        // Locate the input field by its ID or class
         const inputField = page.locator('input[name="usage"]');
     
         // Check if the input field is visible
@@ -44,7 +43,6 @@ test.describe('User Story 2: Enter Annual Consumption', () => {
         const inputField = page.getByLabel('Jahresverbrauch:');
         // Check if the input field is visible and clickable
         await expect(inputField).toBeVisible();
-       
         await page.getByLabel('Jahresverbrauch:').click();
         await page.getByLabel('Jahresverbrauch:').fill('6000');
         await expect(page.getByLabel('Jahresverbrauch:')).toBeVisible();
@@ -81,11 +79,11 @@ test.describe('User Story 2: Enter Annual Consumption', () => {
         const inputField = page.getByLabel('Jahresverbrauch:');
         const errorMessageContainer = page.locator('#usage');
     
-        // Define the invalid and valid values
+        // Invalid and valid values
         const invalidValue = '-100';
         const validValue = '6000';
     
-        // Step 1: Enter an invalid value and verify the error message
+        // Enter an invalid value and verify the error message
         await inputField.click();
         await inputField.fill(invalidValue);
         await page.getByLabel('Jahresverbrauch:').press('Enter');
@@ -94,7 +92,7 @@ test.describe('User Story 2: Enter Annual Consumption', () => {
         await expect(errorMessageContainer).toBeVisible();
         await expect(errorMessageContainer).toHaveText('Bitte geben Sie Ihren Jahresverbrauch ein');
     
-        // Step 2: Enter a valid value and verify that the error message disappears
+        // Enter a valid value and verify that the error message disappears
         await inputField.click();
         await inputField.fill(validValue);
         await page.getByLabel('Jahresverbrauch:').press('Enter');

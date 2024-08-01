@@ -9,14 +9,12 @@ As a user, I want to be able to enter my annual consumption value into the input
 
 2. **Enter Valid Consumption**
    - When the user enters a valid annual consumption value (numeric), the value should be accepted without error.
-   - The system should accept values within a reasonable range.
+   - The system should accept values.
 
 3. **Enter Invalid Consumption**
    - When the user enters an invalid annual consumption value (e.g., negative numbers), an error message should be displayed.
-   - The input should be rejected or corrected based on validation rules.
 
 4. **Handle Edge Cases**
-   - The input field should handle edge cases such as very large numbers or special characters gracefully.
    - The system should not crash or behave unexpectedly for edge cases.
 
 ## Test Case
@@ -39,5 +37,5 @@ The test case for this user story is located in the file `tests/test_cases/enter
 
 4. **Re-enter Correct Value After Error**
    - Enter an invalid annual consumption value and verify that the error message is shown.
-   - Correct the value to a valid number
+   - Correct the value to a valid number.
    - Verify that the valid input is accepted and the error message is no longer displayed.
