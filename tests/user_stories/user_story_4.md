@@ -24,6 +24,11 @@ Unser flexibler Tarif".
    - The state of the checkboxes should persist even if the page is refreshed within the same session.
    - After the page reloads, previously selected or deselected checkboxes should maintain their state.
 
+5. **Form Submission Without Postleitzahl**
+   - **Submit Without Postleitzahl:** Select one or more checkboxes, leave the "Postleitzahl" field empty, and click submit. Verify that:
+     - An error message is displayed indicating that the "Postleitzahl" field is required.
+     - No corrisponding tariff cards are processed.
+
 ### Test Scenarios
 
 1. **Verify Initial State**
@@ -35,6 +40,14 @@ Unser flexibler Tarif".
    - **Deselect Checkbox:** Click on the selected checkbox to deselect it and verify that:
      - The checkbox reverts to its default state, removing the color change or checkmark to indicate it is deselected.
 
-2. **Display and Removal of Tariff Card**
+3. **Display and Removal of Tariff Card**
    - Select a checkbox and verify that tariff card corresponding should be displayed correctly.
    - Deselect the checkbox and verify that the tarif card is no longer visible.
+
+4. **Checkbox State Persistence After Refresh**
+   - Select and deselect checkboxes, refresh the page, and verify that the checkbox states persist as expected.
+
+5. **Form Submission Without Postleitzahl**
+   - **Submit Without Postleitzahl:** Select one or more checkboxes without entering a value in the "Postleitzahl" field, submit the form, and verify that:
+     - An appropriate error message is displayed.
+     - The form does not process the correct tariff cards.
