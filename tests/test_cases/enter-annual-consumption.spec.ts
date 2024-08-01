@@ -51,7 +51,7 @@ test.describe('User Story 2: Enter Annual Consumption', () => {
         
     })
 
-    test('Verify Invalid Consumption Data)', async ({ page }) => {
+    test('Verify Invalid Consumption Data', async ({ page }) => {
         // Locate the input field and error message container by their labels
         const inputField = page.getByLabel('Jahresverbrauch:');
         const errorMessageContainer = page.locator('#usage');

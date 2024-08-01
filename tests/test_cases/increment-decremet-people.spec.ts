@@ -27,7 +27,7 @@ test.afterEach(async ({ page }) => {
     await page.close(); 
 });
 
-test.describe('Increment and Decrement People', () => {
+test.describe('User Story 1: Adjusting the Number of People', () => {
 
     test('Verify Initial Number', async ({ page }) => {
        // Verify the visibility of the 'Personen verringern' label
