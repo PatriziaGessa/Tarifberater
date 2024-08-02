@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository hosts a suite of automated tests for the Online Tarifberater application from Wien Energie. The goal of these tests is to rigorously assess the functionality and reliability of the application through a range of scenarios. By simulating user interactions and validating expected outcomes, these tests help ensure that the application operates correctly and meets user expectations.
+This repository hosts a suite of automated tests for the Online Tarifberater application from Wien Energie. The goal of these tests is to rigorously assess the functionality of the application through a range of scenarios. By simulating user interactions and validating expected outcomes, these tests help ensure that the application operates correctly and meets user expectations.
 
 ## Application Under Test
 
