@@ -29,7 +29,6 @@ test.afterEach(async ({ page }) => {
 
 test.describe('User Story 4: Manage Promotional Rate with Checkboxes', () => {   
     
-
     test('Verify Initial Checkbox State', async ({ page }) => {
         // Locate the checkbox for 'Nur mit preisgarantie' and verify it is visible
         const preisgarantieCheckbox = page.locator('label').filter({ hasText: 'Nur mit preisgarantie' }).locator('div').first();
@@ -79,7 +78,6 @@ test.describe('User Story 4: Manage Promotional Rate with Checkboxes', () => {
     })
 
     test('Verify Tariff Cards after Selecet "Nur mit preisgarantie" and Submit', async ({ page }) => {
-        //Nur mit Preisgarantie
         // Locate the checkbox for 'Nur mit preisgarantie' and verify it is visible
         const preisgarantieCheckbox = page.locator('label').filter({ hasText: 'Nur mit preisgarantie' }).locator('div').first();
         await page.getByPlaceholder('z.B.').click();
@@ -92,7 +90,6 @@ test.describe('User Story 4: Manage Promotional Rate with Checkboxes', () => {
     })
 
     test('Verify Tariff Cards after Selecet "Nur Strom aus erneuerbarer Energie" and Submit', async ({ page }) => {
-        //Nur mit Preisgarantie
         // Locate the checkbox for 'Nur mit renewableEnergyCheckbox' and verify it is visible
         const renewableEnergyCheckbox = page.locator('label').filter({ hasText: 'Nur Strom aus erneuerbarer Energie' }).locator('div').first();
         await page.getByPlaceholder('z.B.').click();
@@ -106,7 +103,6 @@ test.describe('User Story 4: Manage Promotional Rate with Checkboxes', () => {
     })
 
     test('Verify Tariff Cards after Selecet "Nur ohne Bindung" and Submit', async ({ page }) => {
-        //Nur mit Preisgarantie
         // Locate the checkbox for 'Nur mit ohne BindungCheckbox' and verify it is visible
         const ohneBindungCheckbox = page.locator('label').filter({ hasText: 'Nur ohne Bindung' }).locator('div').first();
         await page.getByPlaceholder('z.B.').click();
@@ -118,55 +114,45 @@ test.describe('User Story 4: Manage Promotional Rate with Checkboxes', () => {
         await expect(page.getByRole('heading', { name: 'OPTIMA Aktiv', exact: true })).toBeVisible();        
     })
     
-
     test('Refresh Page and Verify Checkbox State', async ({ page }) => {
-        // Locate the checkbox for 'Nur mit preisgarantie' and verify it is visible
+        // Locate checkboxes
         const preisgarantieCheckbox = page.locator('label').filter({ hasText: 'Nur mit preisgarantie' }).locator('div').first();
         const renewableEnergyCheckbox = page.locator('label').filter({ hasText: 'Nur Strom aus erneuerbarer' }).locator('div').first();
         const noBindingCheckbox = page.locator('label').filter({ hasText: 'Nur ohne Bindung' }).locator('div').first();
-
+        // Click on each checkbox
         await page.locator('label').filter({ hasText: 'Nur mit Preisgarantie' }).locator('div').first().click();
         await page.locator('label').filter({ hasText: 'Nur Strom aus erneuerbarer' }).locator('div').first().click();
         await page.locator('label').filter({ hasText: 'Nur ohne Bindung' }).locator('div').first().click();
         await page.reload(); // Refresh the page
         await page.waitForTimeout(1000);  
         // Verify that the checkboxes are still checked
-        await expect(preisgarantieCheckbox).toBeChecked();  //preisgarantieCheckbox       
-        await expect(renewableEnergyCheckbox).toBeChecked();//renewableEnergyCheckbox        
+        await expect(preisgarantieCheckbox).toBeChecked();  //preisgarantieCheckbox      
+        await expect(renewableEnergyCheckbox).toBeChecked();//renewableEnergyCheckbox     
         await expect(noBindingCheckbox).toBeChecked(); //noBindingCheckbox
     }) 
 
     test('Submit with empty Postleitzahl field', async ({ page }) => {
+        // Select the "Nur mit Preisgarantie" checkbox
         await page.locator('label').filter({ hasText: 'Nur mit Preisgarantie' }).locator('div').first().click();
-        await page.getByRole('button', { name: 'Tarife anzeigen' }).click();
-        await expect(page.getByText('Bitte geben Sie eine gültige')).toBeVisible();
+        await page.getByRole('button', { name: 'Tarife anzeigen' }).click(); // Click the submit button
+        await expect(page.getByText('Bitte geben Sie eine gültige')).toBeVisible(); // Verify the error message is visible
 
     })
 
     test('Verify error message is not more visible ', async ({ page }) => {
+        // Select the "Nur mit Preisgarantie" checkbox
         await page.locator('label').filter({ hasText: 'Nur mit Preisgarantie' }).locator('div').first().click();
-        await page.getByRole('button', { name: 'Tarife anzeigen' }).click();
-        await expect(page.getByText('Bitte geben Sie eine gültige')).toBeVisible();
+        await page.getByRole('button', { name: 'Tarife anzeigen' }).click(); // Click the submit button
+        await expect(page.getByText('Bitte geben Sie eine gültige')).toBeVisible();  // Verify the error message is visible
         await page.waitForTimeout(2000);
-
+        // Enter a valid ZIP code
         await page.getByPlaceholder('z.B.').click();
         await page.getByPlaceholder('z.B.').fill('1030');
         await page.waitForTimeout(2000);
-        await page.getByRole('button', { name: 'Tarife anzeigen' }).click();
-        await expect(page.getByText('Bitte geben Sie eine gültige')).not.toBeVisible();
+        await page.getByRole('button', { name: 'Tarife anzeigen' }).click(); // Click the submit button again
+        await expect(page.getByText('Bitte geben Sie eine gültige')).not.toBeVisible(); // Verify the error message is no longer visible
         await page.waitForTimeout(2000);
-        await expect(page.getByRole('heading', { name: 'OPTIMA Entspannt', exact: true })).toBeVisible();
-
-
-
-        
+        await expect(page.getByRole('heading', { name: 'OPTIMA Entspannt', exact: true })).toBeVisible(); // Verify the tariff is visible   
     })
-    
-    
 
-
-  
-
-    
- 
 })

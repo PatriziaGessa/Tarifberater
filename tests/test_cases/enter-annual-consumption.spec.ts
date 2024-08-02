@@ -11,7 +11,7 @@ import { test, expect } from '@playwright/test';
  * 3. Enter Invalid Consumption (Negative Number)
  * 4. Re-enter Correct Value After Error 
  *
- * Refer to the documentation in `user-story-2.md` for detailed acceptance criteria
+ * Refer to the documentation in `tests\user_stories\user_story_2.md` for detailed acceptance criteria
  * and test scenarios.
  */
 
@@ -75,6 +75,7 @@ test.describe('User Story 2: Enter Annual Consumption', () => {
         }
         
     })
+
     test('Re-enter Correct Value After Error', async ({ page }) => {
         const inputField = page.getByLabel('Jahresverbrauch:');
         const errorMessageContainer = page.locator('#usage');
@@ -98,18 +99,7 @@ test.describe('User Story 2: Enter Annual Consumption', () => {
         await page.getByLabel('Jahresverbrauch:').press('Enter');
         
         // Verify that the error message is no longer visible
-        await expect(errorMessageContainer).toBeHidden();
-
-        
+        await expect(errorMessageContainer).toBeHidden();     
     })
     
-
-
-    
-    
-    
-    
-    
-
- 
 })

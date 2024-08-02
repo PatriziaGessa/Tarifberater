@@ -29,6 +29,9 @@ Unser flexibler Tarif".
      - An error message is displayed indicating that the "Postleitzahl" field is required.
      - No corrisponding tariff cards are processed.
 
+## Test Case
+The test case for this user story is located in the file `tests\test_cases\checkbox.spec.ts`.
+
 ### Test Scenarios
 
 1. **Verify Initial State**

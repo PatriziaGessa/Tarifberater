@@ -12,7 +12,7 @@ import { test, expect } from '@playwright/test';
  * 4. Handle Minimum Value
  * 5. Handle Maximum Value
  *
- * Refer to the documentation in `user-story-1.md` for detailed acceptance criteria
+ * Refer to the documentation in `tests\user_stories\user_story_1.md` for detailed acceptance criteria
  * and test scenarios.
  */
 

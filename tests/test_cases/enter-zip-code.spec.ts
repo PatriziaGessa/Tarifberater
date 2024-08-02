@@ -12,7 +12,7 @@ import { test, expect } from '@playwright/test';
  * 4. Handling long ZIP codes (more than 4 digits).
  * 5. Re-entering and validating a corrected ZIP code after an error. 
  * 
- * Refer to the documentation in `user-story-3.md` for detailed acceptance criteria
+ * Refer to the documentation in `tests\user_stories\user_story_3.md` for detailed acceptance criteria
  * and test scenarios.
  */
 
@@ -92,7 +92,6 @@ test.describe('User Story 3: Enter ZIP Code - Postleitzahl', () => {
     })
 
     test('Re-enter Correct Value After Error', async ({ page }) => {
-        //Enter an invalid ZIP code 
         await page.getByPlaceholder('z.B.').click(); 
         await page.getByPlaceholder('z.B.').fill('103'); // Enter invalid ZIP code
         await page.getByPlaceholder('z.B.').press('Enter'); // Submit the input
@@ -117,22 +116,5 @@ test.describe('User Story 3: Enter ZIP Code - Postleitzahl', () => {
         const tariffWrapper = page.locator('.swiper-wrapper');
         await expect(tariffWrapper).toBeVisible({ timeout: 10000 });      
     });
-
-    
-    
-
-   
-    
-
-  
-    
-
-
-    
-        
-    
-    
-    
-
    
 })
