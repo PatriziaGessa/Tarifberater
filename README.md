@@ -35,6 +35,3 @@ Testing across multiple browsers is crucial as it helps identify and address any
 - **Test Cases**: Found in the `tests/test_cases` directory, these tests cover a variety of scenarios based on the application's functionality, checking various features and interactions.
 
 - **User Stories**: Detailed acceptance criteria and test scenarios are documented in `tests/user_stories` files. These documents provide clarity on the expected behavior of the application and guide the creation of test cases.
-
-
-
