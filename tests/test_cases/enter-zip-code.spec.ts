@@ -113,6 +113,7 @@ test.describe('User Story 3: Enter ZIP Code - Postleitzahl', () => {
         await expect(page.getByText(errorMessage)).not.toBeVisible(); // Ensure the error message is no longer visible
 
         // Verify that tariffs are displayed
+        await page.waitForTimeout(1000);
         const tariffWrapper = page.locator('.swiper-wrapper');
         await expect(tariffWrapper).toBeVisible({ timeout: 10000 });      
     });
