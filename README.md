@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository hosts a suite of automated tests for the Online Tarifberater application from Wien Energie. The goal of these tests is to rigorously assess the functionality and reliability of the application through a range of scenarios. By simulating user interactions and validating expected outcomes, these tests help ensure that the application operates correctly and meets user expectations.
+This repository hosts a suite of automated tests for the Online Tarifberater application from Wien Energie. The goal of these tests is to assess the functionality and reliability of the application through a range of scenarios. By simulating user interactions and validating expected outcomes, these tests help ensure that the application operates correctly and meets user expectations.
 
 ## Application Under Test
 
@@ -16,15 +16,15 @@ The testing focuses on validating various aspects of the application, including:
 
 - **Tariff Functionality**: Ensures that the application correctly handles and displays different tariff options.
 - **Form Validation**: Checks for proper handling of form inputs, including required fields and error messages.
-- **Error Scenarios**: Verifies that appropriate error messages are shown for invalid or incomplete input.
+- **Error Scenarios**: Verifies that appropriate error messages are shown for invalid.
 - **State Preservation**: Confirms that selected options and states are maintained even after page refreshes or interactions.
 
 ## Browsers Tested
 
 Tests are executed across different browsers to ensure cross-browser compatibility:
 
-- **Chromium**: Tests are run on the Chromium browser to verify functionality and performance.
-- **Firefox**: Additional tests are conducted on Firefox to ensure that the application performs well across different environments.
+- **Chromium**: Tests are run on the Chromium browser to verify functionality.
+- **Firefox**: To ensure compatibility with another popular browser and to catch any browser-specific issues.
 
 Testing across multiple browsers is crucial as it helps identify and address any browser-specific issues, ensuring a consistent user experience regardless of the browser used.
 
