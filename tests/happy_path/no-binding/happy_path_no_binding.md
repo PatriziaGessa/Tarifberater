@@ -2,8 +2,8 @@
 
 ## Overview
 
-This document outlines the happy path scenarios for testing the "Nur ohne Bindung" (No Binding) option within the tariff recommendation form. 
-The happy path scenarios are designed to verify that the system behaves as expected when the user interacts with the form correctly.
+This document outlines the happy path scenario for testing the "Nur ohne Bindung" (No Binding) option within the tariff recommendation form. 
+The happy path scenario is designed to verify that the system behaves as expected when the user interacts with the form correctly.
 
 ## Test Case: Happy Path for "Nur ohne Bindung"
 
