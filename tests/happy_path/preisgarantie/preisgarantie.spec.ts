@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
 /**
  * Test Suite for Happy Path: "Nur mit Preisgarantie" Option
@@ -7,13 +7,13 @@ import { test, expect } from '@playwright/test';
  * (Only Preisgarantie) option in the tariff recommendation form. It covers the following scenarios:
  *
  * 1. Open the website
- * 2. Enter Valid Number of People   
+ * 2. Enter Valid Number of People
  * 3. Enter Valid Annual Consumption
  * 4. Enter Valid Zip Code
  * 5. Select the "Nur mit Preisgarantie" Checkbox
  * 6. Submit the Form
  * 7. Verify the Display of Tariffs with Preisgarantie Only
- * 
+ *
  *  The suite includes three specific scenarios:
  * - Default number of people (2)
  * - Minimum number of people (1)
@@ -23,87 +23,124 @@ import { test, expect } from '@playwright/test';
  * and test scenarios.
  */
 
-// Test setup to navigate to the page and accept cookies 
-test.beforeEach(async ({ page }) => { 
-    await page.goto('https://www.wienenergie.at/privat/produkte/strom/');
-    await page.getByRole('button', { name: 'Auswahl akzeptieren' }).click();
-});  
-
-// Cleanup after each test 
-test.afterEach(async ({ page }) => { 
-    await page.close(); 
+// Test setup to navigate to the page and accept cookies
+test.beforeEach(async ({ page }) => {
+  await page.goto("https://www.wienenergie.at/privat/produkte/strom/");
+  await page.getByRole("button", { name: "Auswahl akzeptieren" }).click();
 });
 
-test.describe('Nur mit Preisgarantie', () => {
+// Cleanup after each test
+test.afterEach(async ({ page }) => {
+  await page.close();
+});
 
-    test('Verify display of tariffs with default number of people', async ({ page }) => {
-        await page.getByLabel('Jahresverbrauch:').dblclick();
-        // Fill in yearly consumption value and ZIP code
-        await page.getByLabel('Jahresverbrauch:').fill('6000');   
-        await page.getByPlaceholder('z.B.').click();
-        await page.getByPlaceholder('z.B.').fill('1030'); 
+// Configure the test to run with the browser visible (headless: false) and slow down each action by 600ms
+// This setup is useful for demonstrations or debugging, allowing the user to see interactions in real-time.
+test.use({
+  launchOptions: {
+    headless: false, // Run browser in headful mode (visible)
+    slowMo: 600, // Slow down each operation by 600 milliseconds for better visibility
+  },
+});
 
-        // Select 'Nur mit Preisgarantie' option and click 'Tarife anzeigen' button
-        await page.locator('label').filter({ hasText: 'Nur mit Preisgarantie' }).locator('div').first().click();
-        await page.getByRole('button', { name: 'Tarife anzeigen' }).click();
+test.describe("Nur mit Preisgarantie", () => {
+  test("Verify display of tariffs with default number of people", async ({
+    page,
+  }) => {
+    await page.getByLabel("Jahresverbrauch:").dblclick();
+    // Fill in yearly consumption value and ZIP code
+    await page.getByLabel("Jahresverbrauch:").fill("6000");
+    await page.getByPlaceholder("z.B.").click();
+    await page.getByPlaceholder("z.B.").fill("1030");
 
-        // Verify that the expected tariffs are visible
-        await expect(page.getByRole('heading', { name: 'OPTIMA Entspannt', exact: true })).toBeVisible();
-        const priceElements = page.locator('.Content-module__content-U7Pyvt');
-        await expect(priceElements.first()).toBeVisible();
+    // Select 'Nur mit Preisgarantie' option and click 'Tarife anzeigen' button
+    await page
+      .locator("label")
+      .filter({ hasText: "Nur mit Preisgarantie" })
+      .locator("div")
+      .first()
+      .click();
+    await page.getByRole("button", { name: "Tarife anzeigen" }).click();
 
-        // Verify OPTIMA Akti tariffs is not visible
-        await expect(page.getByRole('heading', { name: 'OPTIMA Aktiv' })).not.toBeVisible();      
-        
-    })
+    // Verify that the expected tariffs are visible
+    await expect(
+      page.getByRole("heading", { name: "OPTIMA Entspannt", exact: true })
+    ).toBeVisible();
+    const priceElements = page.locator(".Content-module__content-U7Pyvt");
+    await expect(priceElements.first()).toBeVisible();
 
-    test('verify display tariffs when option is selected with 1 person', async ({ page }) => {
-        // Set number of people to 1
-        await page.getByLabel('Personen verringern').click(); // Assuming "Personen reduzieren" decreases the number of people
-        
-        // Set yearly consumption value and ZIP code
-        await page.getByLabel('Jahresverbrauch:').dblclick();
-        await page.getByLabel('Jahresverbrauch:').fill('3000'); // Example value
-        await page.getByPlaceholder('z.B.').click();
-        await page.getByPlaceholder('z.B.').fill('1030');
-        
-        // Select 'Nur mit Preisgarantie' option and click 'Tarife anzeigen' button
-        await page.locator('label').filter({ hasText: 'Nur mit Preisgarantie' }).locator('div').first().click();
-        await page.getByRole('button', { name: 'Tarife anzeigen' }).click();
-        
-        // Verify that the expected tariffs are visible
-        await expect(page.getByRole('heading', { name: 'OPTIMA Entspannt', exact: true })).toBeVisible();
-        const priceElements = page.locator('.Content-module__content-U7Pyvt');
-        await expect(priceElements.first()).toBeVisible();
-        
-        // Verify OPTIMA Akti tariffs is not visible
-        await expect(page.getByRole('heading', { name: 'OPTIMA Aktiv' })).not.toBeVisible();    
-       
-    });
+    // Verify OPTIMA Akti tariffs is not visible
+    await expect(
+      page.getByRole("heading", { name: "OPTIMA Aktiv" })
+    ).not.toBeVisible();
+  });
 
-    test('verify display tariffs when option is selected with maximum number of people ', async ({ page }) => {
-        // Increment number people
-        await page.getByLabel('Personen erhöhen').click();
-        await page.getByLabel('Personen erhöhen').click();
-        await page.getByLabel('Personen erhöhen').click();
-        await page.getByLabel('Jahresverbrauch:').dblclick();
-        // Fill in yearly consumption value and ZIP code
-        await page.getByLabel('Jahresverbrauch:').fill('5000');   
-        await page.getByPlaceholder('z.B.').click();
-        await page.getByPlaceholder('z.B.').fill('1030'); 
+  test("verify display tariffs when option is selected with 1 person", async ({
+    page,
+  }) => {
+    // Set number of people to 1
+    await page.getByLabel("Personen verringern").click(); // Assuming "Personen reduzieren" decreases the number of people
 
-        // Select 'Nur mit Preisgarantie' option and click 'Tarife anzeigen' button
-        await page.locator('label').filter({ hasText: 'Nur mit Preisgarantie' }).locator('div').first().click();
-        await page.getByRole('button', { name: 'Tarife anzeigen' }).click();
+    // Set yearly consumption value and ZIP code
+    await page.getByLabel("Jahresverbrauch:").dblclick();
+    await page.getByLabel("Jahresverbrauch:").fill("3000"); // Example value
+    await page.getByPlaceholder("z.B.").click();
+    await page.getByPlaceholder("z.B.").fill("1030");
 
-        // Verify that the expected tariffs are visible
-        await expect(page.getByRole('heading', { name: 'OPTIMA Entspannt', exact: true })).toBeVisible();
-        const priceElements = page.locator('.Content-module__content-U7Pyvt');
-        await expect(priceElements.first()).toBeVisible();
+    // Select 'Nur mit Preisgarantie' option and click 'Tarife anzeigen' button
+    await page
+      .locator("label")
+      .filter({ hasText: "Nur mit Preisgarantie" })
+      .locator("div")
+      .first()
+      .click();
+    await page.getByRole("button", { name: "Tarife anzeigen" }).click();
 
-        // Verify OPTIMA Akti tariffs is not visible
-        await expect(page.getByRole('heading', { name: 'OPTIMA Aktiv' })).not.toBeVisible();    
-        
-    })
-       
-})
+    // Verify that the expected tariffs are visible
+    await expect(
+      page.getByRole("heading", { name: "OPTIMA Entspannt", exact: true })
+    ).toBeVisible();
+    const priceElements = page.locator(".Content-module__content-U7Pyvt");
+    await expect(priceElements.first()).toBeVisible();
+
+    // Verify OPTIMA Akti tariffs is not visible
+    await expect(
+      page.getByRole("heading", { name: "OPTIMA Aktiv" })
+    ).not.toBeVisible();
+  });
+
+  test("verify display tariffs when option is selected with maximum number of people ", async ({
+    page,
+  }) => {
+    // Increment number people
+    await page.getByLabel("Personen erhöhen").click();
+    await page.getByLabel("Personen erhöhen").click();
+    await page.getByLabel("Personen erhöhen").click();
+    await page.getByLabel("Jahresverbrauch:").dblclick();
+    // Fill in yearly consumption value and ZIP code
+    await page.getByLabel("Jahresverbrauch:").fill("5000");
+    await page.getByPlaceholder("z.B.").click();
+    await page.getByPlaceholder("z.B.").fill("1030");
+
+    // Select 'Nur mit Preisgarantie' option and click 'Tarife anzeigen' button
+    await page
+      .locator("label")
+      .filter({ hasText: "Nur mit Preisgarantie" })
+      .locator("div")
+      .first()
+      .click();
+    await page.getByRole("button", { name: "Tarife anzeigen" }).click();
+
+    // Verify that the expected tariffs are visible
+    await expect(
+      page.getByRole("heading", { name: "OPTIMA Entspannt", exact: true })
+    ).toBeVisible();
+    const priceElements = page.locator(".Content-module__content-U7Pyvt");
+    await expect(priceElements.first()).toBeVisible();
+
+    // Verify OPTIMA Akti tariffs is not visible
+    await expect(
+      page.getByRole("heading", { name: "OPTIMA Aktiv" })
+    ).not.toBeVisible();
+  });
+});
